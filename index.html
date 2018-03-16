@@ -11,7 +11,7 @@
     var developerKey = 'AIzaSyDp5b_YaUrrcAWpwGjV6vb3igfiyVP79EU';
 
     // The Client ID obtained from the Google API Console. Replace with your own Client ID.
-    var clientId = "303214978933-qmqijqrsrb1kpbjidtc7msuougdn9fik.apps.googleusercontent.com"
+    var clientId = "303214978933-qmqijqrsrb1kpbjidtc7msuougdn9fik.apps.googleusercontent.com  "
 
     // Replace with your own project number from console.developers.google.com.
     // See "Project number" under "IAM & Admin" > "Settings"
@@ -54,19 +54,32 @@
     // Create and render a Picker object for searching images.
     function createPicker() {
       if (pickerApiLoaded && oauthToken) {
-        var view = new google.picker.View(google.picker.ViewId.DOCS);
+         var view = new google.picker.View(google.picker.ViewId.DOCS);
         view.setMimeTypes("image/png,image/jpeg,image/jpg");
-        var picker = new google.picker.PickerBuilder()
-            .enableFeature(google.picker.Feature.NAV_HIDDEN)
-            .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
-            .setAppId(appId)
-            .setOAuthToken(oauthToken)
-            .addView(view)
-            .addView(new google.picker.DocsUploadView())
-            .setDeveloperKey(developerKey)
-            .setCallback(pickerCallback)
-            .build();
-         picker.setVisible(true);
+
+        // var picker = new google.picker.PickerBuilder()
+        //     .enableFeature(google.picker.Feature.NAV_HIDDEN)
+        //     .enableFeature(google.picker.Feature.MULTISELECT_ENABLED)
+        //     .setAppId(appId)
+        //     .setOAuthToken(oauthToken)
+        //     .addView(view)
+        //     .addView(new google.picker.DocsUploadView())
+        //     .setDeveloperKey(developerKey)
+        //     .setCallback(pickerCallback)
+        //     .build();
+        //  picker.setVisible(true);
+        var uploadView = new google.picker.DocsUploadView();
+
+    var picker = new google.picker.PickerBuilder().
+        addView(view).
+        addView(uploadView).
+        setAppId(appId).
+        setOAuthToken(oauthToken).
+        setCallback(pickerCallback).
+        build();
+    picker.setVisible(true);
+
+
       }
     }
 
